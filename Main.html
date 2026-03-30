@@ -286,7 +286,7 @@
         }
 
         /* Senior - pyramid layout */
-        .senior-grid {
+        .-grid {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -294,17 +294,17 @@
             margin-bottom: 1.5rem;
         }
 
-        .senior-featured {
+        .-featured {
             display: flex;
             justify-content: center;
             width: 100%;
         }
 
-        .senior-featured .coach-card {
+        .-featured .coach-card {
             width: clamp(180px, 22%, 280px);
         }
 
-        .senior-row {
+        .-row {
             display: flex;
             justify-content: center;
             gap: 1.25rem;
@@ -312,7 +312,7 @@
             flex-wrap: wrap;
         }
 
-        .senior-row .coach-card {
+        .-row .coach-card {
             width: clamp(160px, 22%, 260px);
             flex: 0 0 auto;
         }
@@ -801,7 +801,7 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .senior-row { grid-template-columns: repeat(2, 1fr); }
+            .-row { grid-template-columns: repeat(2, 1fr); }
             .coaches-grid { grid-template-columns: repeat(2, 1fr); }
             .ft-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -869,8 +869,8 @@
         <div class="divider"></div>
     </div>
 
-    <!-- SENIOR COACHES -->
-    <div class="trainer-tier-label reveal">Senior Coaches</div>
+    <!--  New Trainer senior COACHES -->
+    <div class="trainer-tier-label reveal"> Coaches</div>
 
     <div class="senior-grid reveal">
         <div class="senior-featured">
@@ -894,7 +894,7 @@
         </div>
     </div>
 
-    <!-- COACHES -->
+    <!-- New Trainer COACHES -->
     <div class="trainer-tier-label reveal" style="margin-top: 4rem;">Certified Coaches</div>
 
     <div class="coaches-grid reveal">
