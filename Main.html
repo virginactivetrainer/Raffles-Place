@@ -286,7 +286,7 @@
         }
 
         /* Senior - pyramid layout */
-        .-grid {
+        .senior-grid {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -294,17 +294,17 @@
             margin-bottom: 1.5rem;
         }
 
-        .-featured {
+        .senior-featured {
             display: flex;
             justify-content: center;
             width: 100%;
         }
 
-        .-featured .coach-card {
+        .senior-featured .coach-card {
             width: clamp(180px, 22%, 280px);
         }
 
-        .-row {
+        .senior-row {
             display: flex;
             justify-content: center;
             gap: 1.25rem;
@@ -312,7 +312,7 @@
             flex-wrap: wrap;
         }
 
-        .-row .coach-card {
+        .senior-row .coach-card {
             width: clamp(160px, 22%, 260px);
             flex: 0 0 auto;
         }
@@ -801,7 +801,7 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .-row { grid-template-columns: repeat(2, 1fr); }
+            .senior-row { grid-template-columns: repeat(2, 1fr); }
             .coaches-grid { grid-template-columns: repeat(2, 1fr); }
             .ft-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -869,8 +869,8 @@
         <div class="divider"></div>
     </div>
 
-    <!--  New Trainer senior COACHES -->
-    <div class="trainer-tier-label reveal"> Coaches</div>
+    <!-- SENIOR COACHES -->
+    <div class="trainer-tier-label reveal">Senior Coaches</div>
 
     <div class="senior-grid reveal">
         <div class="senior-featured">
@@ -891,16 +891,16 @@
                     <div class="coach-role" style="color:var(--red)">Senior Coach</div>
                 </div>
             </a>
+            <!-- NEW SENIOR TRAINER -->
         </div>
     </div>
 
-    <!-- New Trainer COACHES -->
+    <!-- CERTIFIED COACHES -->
     <div class="trainer-tier-label reveal" style="margin-top: 4rem;">Certified Coaches</div>
 
     <div class="coaches-grid reveal">
         <a href="Triner/Trainer.html" class="coach-card"><img src="Trainer.jpg" alt="Trainer" class="coach-card-img" onerror="this.src='https://placehold.co/300x400/1A1A1A/888?text=Mario'"><div class="coach-card-body"><div class="coach-name">Mario</div><div class="coach-role" style="color:var(--red)">Coach</div></div></a>
-        
-    </div>
+        <!-- NEW CERTIFIED TRAINER -->
     </div>
 </section>
 
