@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trainer — Coach | Virgin Active</title>
+  <title>TrainerName — Coach | Virgin Active</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -99,13 +99,13 @@
 
 <section class="hero">
   <div class="hero-image">
-    <img src="Trainer.jpg" alt="Trainer" onerror="this.src='https://placehold.co/800x1000/f0f0f0/999?text=Aly'">
+    <img src="TrainerName.jpg" alt="TrainerName" onerror="this.src='https://placehold.co/800x1000/f0f0f0/999?text=Aly'">
     <div class="hero-image-overlay"></div>
     <div class="achievement-ribbon">🏆 coming soon</div>
   </div>
   <div class="hero-content">
     <div class="hero-tag">Virgin Active &middot; Coach</div>
-    <h1 class="hero-name">Trainer</h1>
+    <h1 class="hero-name">TrainerName</h1>
     <div class="hero-role">Coach</div>
     <div class="hero-divider"></div>
     <p class="hero-about"><strong>Aspiring Bikini Competitor.</strong> I'm here to help you build confidence, feel stronger, and create habits that actually fit your lifestyle. Outside the gym, I'm obsessed with making food look pretty — we feast with our eyes first!</p>
@@ -160,7 +160,7 @@
     <div class="contact-card">
       <div class="card-label">Get In Touch</div>
       <div class="contact-title">Book a Session</div>
-      <p class="contact-note">Aly will respond within 24–48 hours of scanning your QR code.</p>
+      <p class="contact-note">TrainerName will respond within 24–48 hours of scanning your QR code.</p>
       <div class="form-row">
         <input class="qr-input" type="text" id="memberId" placeholder="Your Member ID (e.g. 123456789)">
         <button class="qr-btn" onclick="generateQRCode()">Generate QR</button>
@@ -192,12 +192,12 @@
   function switchTab(id,btn){document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));btn.classList.add("active");document.getElementById("panel-"+id).classList.add("active");}
   function generateQRCode(){
     const memberId=document.getElementById("memberId").value.trim()||"___________";
-    const email="Alicia.Ang@virginactive.com.sg";
+    const email="TrainerName@virginactive.com.sg";
     const subject=encodeURIComponent("Training Inquiry");
-    const body=encodeURIComponent("Hello Aly,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
+    const body=encodeURIComponent("Hello TrainerName,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
     const mailtoLink="mailto:"+email+"?subject="+subject+"&body="+body;
     const qrContainer=document.getElementById("qr-code");
-    qrContainer.innerHTML="";
+    qrContainer.innerHTML="";s
     new QRCode(qrContainer,{text:mailtoLink,width:200,height:200,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
   }
 </script>
