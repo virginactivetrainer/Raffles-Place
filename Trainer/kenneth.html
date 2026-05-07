@@ -172,7 +172,7 @@
   function switchTab(id,btn){document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));btn.classList.add("active");document.getElementById("panel-"+id).classList.add("active");}
   function generateQRCode(){
     const memberId=document.getElementById("memberId").value.trim()||"___________";
-    const email="kenneth@virginactive.com.sg";
+    const email="Kenneth.Ong@virginactive.com.sg";
     const subject=encodeURIComponent("Training Inquiry");
     const body=encodeURIComponent("Hello Kenneth,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
     const mailtoLink="mailto:"+email+"?subject="+subject+"&body="+body;
