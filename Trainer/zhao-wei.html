@@ -176,7 +176,7 @@ My role is not only to coach, but to equip you with the knowledge and understand
   function switchTab(id,btn){document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));btn.classList.add("active");document.getElementById("panel-"+id).classList.add("active");}
   function generateQRCode(){
     const memberId=document.getElementById("memberId").value.trim()||"___________";
-    const email="zhaowei@virginactive.com.sg";
+    const email="Wei.Ow@virginactive.com.sg";
     const subject=encodeURIComponent("Training Inquiry");
     const body=encodeURIComponent("Hello Zhao Wei,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
     const mailtoLink="mailto:"+email+"?subject="+subject+"&body="+body;
