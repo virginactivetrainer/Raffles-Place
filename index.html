@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virgin Active | Personal Training</title>e
+    <title>Virgin Active | Personal Training</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -206,6 +206,7 @@
         }
 
         .btn-primary:hover { background: var(--red-deep); transform: translateY(-2px); }
+        .btn-primary:disabled { opacity: 0.6; cursor: default; transform: none; }
 
         .btn-outline {
             background: transparent; color: #111;
@@ -648,6 +649,11 @@
             font-size: 0.82rem; color: rgba(0,0,0,0.5); line-height: 1.5;
         }
 
+        .form-error {
+            display: none; color: var(--red); font-size: 0.82rem; line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
         /* ─── CUSTOM DROPDOWN ─── */
         .custom-select-wrapper {
             position: relative;
@@ -1053,7 +1059,7 @@
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li>3 Sessions Package</li>
-                    <li>1-month Expiry
+                    <li>1-month Expiry</li>
                 </ul>
             </div>
 
@@ -1066,7 +1072,7 @@
                 <div class="pricing-divider"></div>
                 <ul class="pricing-features">
                     <li>10 Sessions Package</li>
-                    <li>3 Month expiry
+                    <li>3 Month expiry</li>
                 </ul>
             </div>
 
@@ -1135,7 +1141,11 @@
     </div>
 
     <div class="contact-form reveal">
-        <form id="membershipForm" action="https://formspree.io/f/xanolrbw" method="POST">
+        <form id="membershipForm" novalidate>
+            <div class="form-group">
+                <label class="form-label" for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required class="form-input" placeholder="Enter your full name">
+            </div>
             <div class="form-group">
                 <label class="form-label" for="memberId">Member ID Number</label>
                 <input type="text" id="memberId" name="memberId" required class="form-input" placeholder="Enter your member ID">
@@ -1157,7 +1167,7 @@
                         <div class="custom-option" data-value="Chanel">Chanel</div>
                         <div class="custom-option" data-value="Keston">Keston</div>
                         <div class="custom-option" data-value="Zhao Wei">Zhao Wei</div>
-                        <div class="custom-option" data-value="Zhao Wei">Ernest</div>
+                        <div class="custom-option" data-value="Ernest">Ernest</div>
                         <div class="custom-optgroup-label">Coaches</div>
                         <div class="custom-option" data-value="Aishah">Aishah</div>
                         <div class="custom-option" data-value="Azzy">Azzy</div>
@@ -1168,7 +1178,7 @@
                         <div class="custom-option" data-value="Kenneth">Kenneth</div>
                         <div class="custom-option" data-value="Tim Wong">Tim Wong</div>
                         <div class="custom-option" data-value="Zion">Zion</div>
-                        <div class="custom-option" data-value="Zion">Peggy</div>
+                        <div class="custom-option" data-value="Peggy">Peggy</div>
                     </div>
                 </div>
             </div>
@@ -1176,7 +1186,8 @@
                 <input type="checkbox" id="pdaConsent" required>
                 <label for="pdaConsent">I understand that my data will be used in accordance with Virgin Active's Privacy & Data Handling practices.</label>
             </div>
-            <button type="submit" class="btn-primary" style="width:100%; font-size:0.9rem; padding:1rem;">
+            <p class="form-error" id="formError"></p>
+            <button type="submit" id="submitBtn" class="btn-primary" style="width:100%; font-size:0.9rem; padding:1rem;">
                 Submit Request
             </button>
         </form>
@@ -1193,6 +1204,9 @@
     </div>
     <p>© 2025 Virgin Active. All rights reserved.</p>
 </footer>
+
+<!-- EmailJS — sends the request straight from the browser to the selected trainer, no backend needed -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
     // ─── NAV SCROLL ───
@@ -1276,34 +1290,98 @@
         }
     });
 
+    /* ======================================================================
+       EMAILJS CONFIG
+       Template "New Prospect" must use these exact variable names:
+         {{trainer_name}}  {{From_Name}}  {{Member_ID}}
+       and its "To Email" field must be set to {{to_email}}.
+       ====================================================================== */
+    const EMAILJS_PUBLIC_KEY  = 'ZuT4bqTVYOaswzJ7m';    // Account → General
+    const EMAILJS_SERVICE_ID  = 'service_lb7epfv';      // Email Services
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';     // 👉 paste the ID of the "New Prospect" template
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    /* ======================================================================
+       TRAINER INBOX MAP — whoever is picked in the dropdown receives the email.
+       👉 Fill in each trainer's real email. A trainer left blank will show an
+          error on submit instead of sending to nowhere.
+       ====================================================================== */
+    const TRAINER_EMAILS = {
+        'Aaron':     '',
+        'Jimmy':     '',
+        'Kelvin':    '',
+        'Chanel':    '',
+        'Keston':    '',
+        'Zhao Wei':  '',
+        'Ernest':    '',
+        'Aishah':    '',
+        'Azzy':      '',
+        'Christian': '',
+        'Edwin':     '',
+        'Gerald':    '',
+        'Jayden':    '',
+        'Kenneth':   '',
+        'Tim Wong':  '',
+        'Zion':      '',
+        'Peggy':     '',
+    };
+
     // ─── FORM ───
     document.getElementById('membershipForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        const form = this;
+        const errorEl = document.getElementById('formError');
+        const submitBtn = document.getElementById('submitBtn');
 
+        const fullName = document.getElementById('fullName').value.trim();
+        const memberId = document.getElementById('memberId').value.trim();
+        const trainerName = trainerInput.value;
+
+        const showError = (msg) => {
+            errorEl.textContent = msg;
+            errorEl.style.display = 'block';
+        };
+
+        if (!fullName || !memberId) return showError('Please enter your full name and member ID.');
+        if (!trainerName) return showError('Please select a trainer.');
         if (!document.getElementById('pdaConsent').checked) {
-            alert('Please agree to our Privacy & Data Handling practices.');
-            return;
+            return showError('Please agree to our Privacy & Data Handling practices.');
         }
 
-        if (!trainerInput.value) {
-            alert('Please select a trainer.');
-            return;
+        const trainerEmail = TRAINER_EMAILS[trainerName];
+        if (!trainerEmail) {
+            return showError("This trainer's inbox isn't set up yet. Please pick another trainer or contact the club directly.");
         }
+        errorEl.style.display = 'none';
 
-        fetch('https://formspree.io/f/xpwdngnd', {
-            method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(this)
-        })
-        .then(res => {
-            if (res.ok) {
+        // Variable names match the EmailJS template exactly (case-sensitive).
+        const templateParams = {
+            to_email: trainerEmail,
+            trainer_name: trainerName,
+            From_Name: fullName,
+            Member_ID: memberId,
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(() => {
                 document.getElementById('pdaMessage').style.display = 'block';
-                this.reset();
-            } else {
-                alert('There was an error. Please try again.');
-            }
-        })
-        .catch(() => alert('There was an error. Please try again.'));
+                form.reset();
+                trainerInput.value = '';
+                trainerLabel.textContent = 'Select your trainer';
+                trigger.classList.remove('selected');
+                document.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+            })
+            .catch((err) => {
+                console.error('EmailJS error:', err);
+                showError('There was an error sending your request. Please try again.');
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Request';
+            });
     });
 </script>
 </body>
