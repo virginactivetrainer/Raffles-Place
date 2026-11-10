@@ -750,7 +750,7 @@
             background: rgba(34,197,94,0.1);
             border: 1px solid rgba(34,197,94,0.25);
             border-radius: 8px;
-            color: #86efac;
+            color: #166534;
             font-size: 0.9rem;
             margin-top: 1rem;
         }
@@ -798,25 +798,77 @@
         #trainers, body, #contact { background: #fff; }
 
         /* ─── RESPONSIVE ─── */
+        /* Collapse navigation before tablet widths become cramped. */
+        @media (max-width: 900px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; padding: 10px; }
+        }
+
         @media (max-width: 1024px) {
             .coaches-grid { grid-template-columns: repeat(3, 1fr); }
             .ft-grid { grid-template-columns: repeat(2, 1fr); }
-            .pricing-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+            .pricing-cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
-            .senior-row { grid-template-columns: repeat(2, 1fr); }
-            .coaches-grid { grid-template-columns: repeat(2, 1fr); }
-            .ft-grid { grid-template-columns: 1fr 1fr; }
+            .hero { padding: 7rem 1.5rem 4rem; }
+            .hero h1 { font-size: clamp(3.5rem, 13vw, 6rem); }
+            .hero-sub { font-size: 1rem; }
+            #trainers, #pricing, #contact { padding: 4rem 1.25rem; }
+            .coaches-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+            .coach-selector button { padding: 0.6rem 1rem; font-size: 0.72rem; }
+            .contact-form { padding: 2rem 1.5rem; }
+            footer { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 640px) {
+            .pricing-cards { grid-template-columns: 1fr; max-width: 480px; }
         }
 
         @media (max-width: 480px) {
-            .coaches-grid { grid-template-columns: 1fr 1fr; }
-            .hero h1 { font-size: 4.5rem; }
-            .contact-form { padding: 2rem 1.5rem; }
-            footer { flex-direction: column; text-align: center; }
+            nav { padding: 0.9rem 1.1rem; }
+            .hero { padding: 6rem 1.1rem 3.5rem; }
+            .hero h1 { font-size: clamp(3rem, 16vw, 4.5rem); line-height: 0.9; }
+            .hero-sub { font-size: 0.92rem; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-outline { width: 100%; text-align: center; }
+            #trainers, #pricing, #contact { padding: 3rem 1rem; }
+            .coaches-grid { gap: 0.65rem; }
+            .coach-name { font-size: 1.1rem; }
+            .coach-card-body { padding: 0.75rem 0.85rem 0.9rem; }
+            .ft-card { padding: 1.1rem; }
+            .ft-label { font-size: 1.6rem; }
+            .ft-price { font-size: 1.8rem; }
+            .pricing-card { padding: 1.5rem; }
+            .pricing-price { font-size: 2.8rem; }
+            .contact-form { padding: 1.5rem 1.1rem; }
+            .form-input, .form-select { font-size: 0.9rem; padding: 0.75rem 0.85rem; }
+            footer { padding: 1.5rem 1rem; }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 { font-size: 2.8rem; }
+            .coaches-grid { gap: 0.5rem; }
+            .coach-name { font-size: 1rem; }
+        }
+
+        /* Respect mobile safe areas and prevent iOS text autosizing surprises. */
+        nav { padding-top: max(1.25rem, env(safe-area-inset-top)); }
+        footer { padding-bottom: max(2.5rem, env(safe-area-inset-bottom)); }
+        .mobile-menu { padding-top: max(1rem, env(safe-area-inset-top)); }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        .custom-select-menu { -webkit-overflow-scrolling: touch; }
+
+        @media (hover: none) and (pointer: coarse) {
+            .coach-card:hover, .pricing-card:hover, .ft-card:hover,
+            .btn-primary:hover, .btn-outline:hover { transform: none; }
+            .coach-card:active, .btn-primary:active { transform: scale(0.98); }
         }
     </style>
 </head>
@@ -1219,9 +1271,23 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileClose');
 
-    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
-    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+    const closeMobileMenu = () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        hamburger.setAttribute('aria-expanded', 'false');
+    };
+
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        hamburger.setAttribute('aria-expanded', 'true');
+    });
+    mobileClose.addEventListener('click', closeMobileMenu);
+    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMobileMenu();
+    });
 
     // ─── PRICING TABS ───
     const selectorBtns = document.querySelectorAll('.coach-selector button');
@@ -1299,9 +1365,7 @@
     const EMAILJS_PUBLIC_KEY  = 'qUdVZtB3j1C_CeuW3';    // Account → General
     const EMAILJS_SERVICE_ID  = 'service_29dv5ul';      // Email Services
     const EMAILJS_TEMPLATE_ID = 'template_nokxx7t';     // 👉 paste the ID of the "New Prospect" template
-    emailjs.init({
-    publicKey: EMAILJS_PUBLIC_KEY
-}) ;
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
     /* ======================================================================
        TRAINER INBOX MAP — whoever is picked in the dropdown receives the email.
@@ -1355,6 +1419,11 @@
             return showError("This trainer's inbox isn't set up yet. Please pick another trainer or contact the club directly.");
         }
         errorEl.style.display = 'none';
+        document.getElementById('pdaMessage').style.display = 'none';
+
+        if (!window.emailjs || typeof emailjs.send !== 'function') {
+            return showError('The booking service is temporarily unavailable. Please refresh the page and try again.');
+        }
 
         // Variable names match the EmailJS template exactly (case-sensitive).
         const templateParams = {
