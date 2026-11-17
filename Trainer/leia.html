@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Peggy — Coach | Virgin Active</title>
+  <title>Leia — Coach | Virgin Active</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -99,23 +99,26 @@
 
 <section class="hero">
   <div class="hero-image">
-    <img src="../Photo/peggy.jpg" alt="Peggy" onerror="this.src='https://placehold.co/800x1000/f0f0f0/999?text=Peggy'">
+    <img src="../Photo/leia.jpg" alt="Leia" onerror="this.src='https://placehold.co/800x1000/f0f0f0/999?text=Leia'">
     <div class="hero-image-overlay"></div>
     <div class="achievement-ribbon">Coach</div>
   </div>
   <div class="hero-content">
     <div class="hero-tag">Virgin Active · Raffles Place</div>
-    <div class="hero-name">Peggy</div>
+    <div class="hero-name">Leia</div>
     <div class="hero-role">Coach</div>
     <div class="hero-divider"></div>
-    <p class="hero-about"><strong> I am a dedicated fitness enthusiast with a deep passion for yoga practice and rhythmic cycling.
-    </strong> I bring both grace and discipline to my approach to wellness. As a former competitive badminton player, I understand the demands of performance, resilience, and consistency. <br>
-With over 15 years of experience in consumer research and data analytics, I offer a unique, science-informed perspective on health—blending analytical insight with a genuine passion for helping clients move better, feel stronger, and live more balanced lives.
-</p>
+    <p class="hero-about"><strong> With 8 years of experience as a Personal Trainer and a background as a National Triple Jump Athlete
+    </strong> Leia brings a strong foundation in athletic performance, movement mechanics and physical conditioning. Her passion for sports extends beyond the gym, with interests in dancing, music and 
+      books that reflect her energetic, creative and curious personality.</p>  
+      <p>Combining her athletic background with practical coaching experience, Leia is passionate about helping individuals move better, perform stronger and unlock their full physical potential. 
+      Whether the goal is improving sports performance, developing functional strength or enhancing overall fitness, she believes in building a body that is capable, adaptable and resilient.
+    </p>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Years in Research & Analytics</div></div>
-      <div class="stat-item"><div class="stat-number">1</div><div class="stat-label">Certification</div></div>
-      <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Specialities</div></div>
+      <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Years as a Personal Trainer</div></div>
+      <div calss="stat-item"><div class="stat-label">Nation Triple Jump Athlete</div></div>
+      <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Certification</div></div>
+      <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">Specialities</div></div>
     </div>
   </div>
 </section>
@@ -127,13 +130,17 @@ With over 15 years of experience in consumer research and data analytics, I offe
   </div>
   <div class="tab-panel active" id="panel-skills">
     <div class="skills-grid">
-      <div class="skill-chip">Flexibility Training</div>
-      <div class="skill-chip">Breathwork</div>
-      <div class="skill-chip">Yoga Practice</div>
+      <div class="skill-chip">Sports-Specific Skills & Performance Development</div>
+      <div class="skill-chip">General Health & Physical Performance</div>
+      <div class="skill-chip">Proprioception & Movement Awareness</div>
+      <div class="skill-chip">Mobility & Flexibility Training</div>
+      <div class="skill-chip">Concurrent Training</div>
+      <div class="skill-chip">Cross-Training & Athletic Conditioning</div>
     </div>
   </div>
   <div class="tab-panel" id="panel-certs">
-    <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>NCSF Certified Personal Trainer</div>
+    <div class="cert-item"><div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+    </div>Diploma in Sports Studies</div>
   </div>
   <div class="two-col">
     <div class="philosophy-card">
@@ -143,7 +150,7 @@ With over 15 years of experience in consumer research and data analytics, I offe
     <div class="contact-card">
       <div class="card-label">Get In Touch</div>
       <div class="contact-title">Book a Session</div>
-      <p class="contact-note">Peggy will respond within 24–48 hours of scanning your QR code.</p>
+      <p class="contact-note">Leia will respond within 24–48 hours of scanning your QR code.</p>
       <div class="form-row">
         <input class="qr-input" type="text" id="memberId" placeholder="Your Member ID (e.g. 123456789)">
         <button class="qr-btn" onclick="generateQRCode()">Generate QR</button>
@@ -175,9 +182,9 @@ With over 15 years of experience in consumer research and data analytics, I offe
   function switchTab(id,btn){document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));btn.classList.add("active");document.getElementById("panel-"+id).classList.add("active");}
   function generateQRCode(){
     const memberId=document.getElementById("memberId").value.trim()||"___________";
-    const email="peggy@virginactive.com.sg";
+    const email="Leia@virginactive.com.sg";
     const subject=encodeURIComponent("Training Inquiry");
-    const body=encodeURIComponent("Hello Peggy,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
+    const body=encodeURIComponent("Hello Leia,\n\nMy Member ID is: "+memberId+"\n\nI am interested in personal training and would like to book a wellness consultation.");
     const mailtoLink="mailto:"+email+"?subject="+subject+"&body="+body;
     const qrContainer=document.getElementById("qr-code");
     qrContainer.innerHTML="";
